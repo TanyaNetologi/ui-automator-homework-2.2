@@ -74,9 +74,10 @@ class ChangeTextTest {
         val packageName = MODEL_PACKAGE
         waitForPackage(packageName)
 
-        val textView = device.findObject(
-            By.res(packageName, "textToBeChanged")
-        )
+        val textView = device.wait(
+            Until.findObject(By.res(packageName, "textToBeChanged")),
+            TIMEOUT
+        ) ?: throw AssertionError("TextView не найден")
 
         val initialText = textView.text
 
